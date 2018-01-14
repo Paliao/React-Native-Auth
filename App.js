@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import firebase from 'firebase'
 
 import { Header } from './src/components/common'
+import LoginForm from './src/components/loginForm'
 
 export default class App extends React.Component {
 
@@ -21,7 +22,7 @@ export default class App extends React.Component {
     return (
       <View>
         <Header title='Header' />
-        <Text>Some random text</Text>
+        <LoginForm/>
       </View>
     )
   }
