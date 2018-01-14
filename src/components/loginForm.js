@@ -6,7 +6,7 @@ class LoginForm extends Component {
 
   constructor(props){
     super(props)
-    this.state={ text: '' }
+    this.state={ email: '' }
   }
 
   render() {
@@ -14,8 +14,10 @@ class LoginForm extends Component {
       <Card>
         <CardSection>
           <Field
+            label='Email'
             value={this.state.text}
-            onChangeText={ text => this.setState({ text })} 
+            placeholder='user@gmail.com'
+            onChangeText={ email => this.setState({ email })} 
             style={ {height: 20, width: 100}}/>
         </CardSection>
 
