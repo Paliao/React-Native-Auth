@@ -6,7 +6,7 @@ class LoginForm extends Component {
 
   constructor(props){
     super(props)
-    this.state={ email: '' }
+    this.state={ email: '', password: '' }
   }
 
   render() {
@@ -15,13 +15,21 @@ class LoginForm extends Component {
         <CardSection>
           <Field
             label='Email'
-            value={this.state.text}
+            value={this.state.email}
             placeholder='user@gmail.com'
-            onChangeText={ email => this.setState({ email })} 
-            style={ {height: 20, width: 100}}/>
+            onChangeText={ email => this.setState({ email })}
+          />
         </CardSection>
 
-        <CardSection/>
+        <CardSection>
+          <Field
+            label='Password'
+            secureTextEntry={true}
+            value={this.state.password}
+            placeholder='Password'
+            onChangeText={password => this.setState({ password })}
+          />
+        </CardSection>
 
         <CardSection>
           <Button text='Log in'/>
