@@ -2,10 +2,16 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import firebase from 'firebase'
 
-import { Header } from './src/components/common'
+import { Button, Header, Spinner } from './src/components/common'
 import LoginForm from './src/components/loginForm'
 
 export default class App extends React.Component {
+
+  constructor(props) {
+    super(props)
+
+    this.state = { loggedIn: null }
+  }
 
   componentWillMount() {
     firebase.initializeApp({
@@ -16,13 +22,37 @@ export default class App extends React.Component {
       storageBucket: 'paliao-auth.appspot.com',
       messagingSenderId: '867835900259'
     })
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if(user) {
+        this.setState({ loggedIn: true})
+      } else {
+        this.setState({ loggedIn: false })
+      }
+    })
+  }
+
+  renderContent() {
+    switch(this.state.loggedIn) {
+      case true:
+        return(
+        <Button 
+          text='Log Out!'
+          onPress={ () => firebase.auth().signOut() }
+          />
+        )
+      case false:
+        return <LoginForm/>
+      default:
+        return <Spinner />
+    }
   }
 
   render() {
     return (
-      <View>
+      <View style={{height: 125}}>
         <Header title='Header' />
-        <LoginForm/>
+        {this.renderContent()}
       </View>
     )
   }
